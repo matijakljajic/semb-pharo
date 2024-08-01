@@ -1,9 +1,6 @@
 Class {
 	#name : #MyTBHeaderComponent,
 	#superclass : #WAComponent,
-	#instVars : [
-		'main'
-	],
 	#category : #'MyTinyBlog-Components'
 }
 
