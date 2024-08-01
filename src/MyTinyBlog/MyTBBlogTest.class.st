@@ -43,6 +43,25 @@ MyTBBlogTest >> testAddPost [
 ]
 
 { #category : #tests }
+MyTBBlogTest >> testAdminChange [
+
+	| admin |
+	
+	admin := blog admin.
+	admin user: 'skeksis'.
+	admin pass: 'corrupt'.
+	self assert: blog admin user equals: 'skeksis'.
+	self assert: blog admin pass equals: (SHA256 hashMessage: 'corrupt')
+]
+
+{ #category : #tests }
+MyTBBlogTest >> testAdminCreation [
+
+	self assert: blog admin user equals: 'admin'.
+	self assert: blog admin pass equals: (SHA256 hashMessage: 'ztonpk')
+]
+
+{ #category : #tests }
 MyTBBlogTest >> testAllCategories [
 
 	self assert: blog allCategories size equals: 1.
@@ -102,9 +121,20 @@ MyTBBlogTest >> testRemoveAllPosts [
 ]
 
 { #category : #tests }
+MyTBBlogTest >> testRemovePost [
+	
+	| count |
+	
+	count := blog allPosts size.
+	blog removePost: (blog allPosts at: 1).
+	self assert: blog allPosts size equals: count - 1.
+]
+
+{ #category : #tests }
 MyTBBlogTest >> testRenameCategoryTo [
 
 	| count |
+	
 	count := (blog allPostsFromCategory: 'firstCategory') size.
 	blog renameCategory: 'firstCategory' to: '1stCategory'.
 	self assert: (blog allPostsFromCategory: 'firstCategory') size equals: 0.

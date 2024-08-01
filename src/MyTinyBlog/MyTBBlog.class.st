@@ -2,6 +2,8 @@ Class {
 	#name : #MyTBBlog,
 	#superclass : #Object,
 	#instVars : [
+		'admin',
+		'name',
 		'posts'
 	],
 	#category : #'MyTinyBlog-App'
@@ -13,6 +15,18 @@ MyTBBlog class >> current [
 	^ self selectAll
 		ifNotEmpty: [ :x | x anyOne ]
 		ifEmpty: [ self new save ]
+]
+
+{ #category : #utilities }
+MyTBBlog class >> defaultUser [
+
+	^ 'admin'
+]
+
+{ #category : #utilities }
+MyTBBlog class >> defaultUserPass [
+
+	^ 'ztonpk'
 ]
 
 { #category : #'class initialization' }
@@ -44,6 +58,11 @@ MyTBBlog >> addPost: aMyTBPost [
 	
 	posts add: aMyTBPost.
 	self save
+]
+
+{ #category : #accessing }
+MyTBBlog >> admin [
+	^ admin
 ]
 
 { #category : #accessing }
@@ -83,6 +102,12 @@ MyTBBlog >> allVisiblePostsFromCategory: aCategory [
 ]
 
 { #category : #action }
+MyTBBlog >> createAdmin [
+
+	^ MyTBAdmin user: self class defaultUser pass: self class defaultUserPass
+]
+
+{ #category : #action }
 MyTBBlog >> deleteCategory: aCategory [
 
 	posts removeAllSuchThat: [ :x | x category = aCategory ].
@@ -93,14 +118,39 @@ MyTBBlog >> deleteCategory: aCategory [
 MyTBBlog >> initialize [
 
 	super initialize.
-	posts := OrderedCollection new
+	posts := OrderedCollection new.
+	admin := self createAdmin
 ]
 
-{ #category : #action }
+{ #category : #accessing }
+MyTBBlog >> name [
+	^ name ifNil: [ 'TinyBlog' ] ifNotNil: [ :arg | name ]
+]
+
+{ #category : #accessing }
+MyTBBlog >> name: anObject [
+	name := anObject
+]
+
+{ #category : #removing }
 MyTBBlog >> removeAllPosts [
 
 	posts := OrderedCollection new.
 	self save
+]
+
+{ #category : #removing }
+MyTBBlog >> removeBlogPost: aPost [
+	
+	posts remove: aPost ifAbsent: [ ].
+	self save.
+]
+
+{ #category : #removing }
+MyTBBlog >> removePost: aPost [
+	
+	posts remove: aPost ifAbsent: [ ].
+	self save.
 ]
 
 { #category : #action }
