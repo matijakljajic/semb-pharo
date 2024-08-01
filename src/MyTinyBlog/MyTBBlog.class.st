@@ -4,16 +4,15 @@ Class {
 	#instVars : [
 		'posts'
 	],
-	#classInstVars : [
-		'uniqueInstance'
-	],
 	#category : #'MyTinyBlog-App'
 }
 
 { #category : #'instance creation' }
 MyTBBlog class >> current [
 
-	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
+	^ self selectAll
+		ifNotEmpty: [ :x | x anyOne ]
+		ifEmpty: [ self new save ]
 ]
 
 { #category : #'class initialization' }
@@ -22,16 +21,29 @@ MyTBBlog class >> initialize [
 	self reset
 ]
 
+{ #category : #initialization }
+MyTBBlog class >> initializeVoyageOnMemoryDB [
+
+	VOMemoryRepository new enableSingleton
+]
+
+{ #category : #testing }
+MyTBBlog class >> isVoyageRoot [
+
+	^ true
+]
+
 { #category : #'instance creation' }
 MyTBBlog class >> reset [
 
-	uniqueInstance := nil
+	self initializeVoyageOnMemoryDB 
 ]
 
 { #category : #accessing }
 MyTBBlog >> addPost: aMyTBPost [ 
 	
 	posts add: aMyTBPost.
+	self save
 ]
 
 { #category : #accessing }
@@ -73,7 +85,8 @@ MyTBBlog >> allVisiblePostsFromCategory: aCategory [
 { #category : #action }
 MyTBBlog >> deleteCategory: aCategory [
 
-	posts removeAllSuchThat: [ :x | x category = aCategory ]
+	posts removeAllSuchThat: [ :x | x category = aCategory ].
+	self save
 ]
 
 { #category : #initialization }
@@ -84,20 +97,17 @@ MyTBBlog >> initialize [
 ]
 
 { #category : #action }
-MyTBBlog >> movePostFrom: aString to: aString2 [ 
-	self shouldBeImplemented.
-]
-
-{ #category : #action }
 MyTBBlog >> removeAllPosts [
 
-	posts := OrderedCollection new
+	posts := OrderedCollection new.
+	self save
 ]
 
 { #category : #action }
 MyTBBlog >> renameCategory: oldCategory to: newCategory [ 
 	
 	posts do: [ :x | x category = oldCategory ifTrue: [ x category: newCategory ] ].
+	self save
 ]
 
 { #category : #accessing }
