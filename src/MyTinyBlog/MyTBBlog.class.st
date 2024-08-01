@@ -132,11 +132,25 @@ MyTBBlog >> name: anObject [
 	name := anObject
 ]
 
-{ #category : #action }
+{ #category : #removing }
 MyTBBlog >> removeAllPosts [
 
 	posts := OrderedCollection new.
 	self save
+]
+
+{ #category : #removing }
+MyTBBlog >> removeBlogPost: aPost [
+	
+	posts remove: aPost ifAbsent: [ ].
+	self save.
+]
+
+{ #category : #removing }
+MyTBBlog >> removePost: aPost [
+	
+	posts remove: aPost ifAbsent: [ ].
+	self save.
 ]
 
 { #category : #action }

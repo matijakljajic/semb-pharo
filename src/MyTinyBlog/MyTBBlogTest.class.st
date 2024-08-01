@@ -121,9 +121,20 @@ MyTBBlogTest >> testRemoveAllPosts [
 ]
 
 { #category : #tests }
+MyTBBlogTest >> testRemovePost [
+	
+	| count |
+	
+	count := blog allPosts size.
+	blog removePost: (blog allPosts at: 1).
+	self assert: blog allPosts size equals: count - 1.
+]
+
+{ #category : #tests }
 MyTBBlogTest >> testRenameCategoryTo [
 
 	| count |
+	
 	count := (blog allPostsFromCategory: 'firstCategory') size.
 	blog renameCategory: 'firstCategory' to: '1stCategory'.
 	self assert: (blog allPostsFromCategory: 'firstCategory') size equals: 0.
