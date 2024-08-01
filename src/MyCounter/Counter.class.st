@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'count'
 	],
-	#category : #MyCounter
+	#category : #'MyCounter-App'
 }
 
 { #category : #'instance creation' }
