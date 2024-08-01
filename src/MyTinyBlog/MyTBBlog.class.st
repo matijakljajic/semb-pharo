@@ -2,6 +2,7 @@ Class {
 	#name : #MyTBBlog,
 	#superclass : #Object,
 	#instVars : [
+		'name',
 		'posts'
 	],
 	#category : #'MyTinyBlog-App'
@@ -94,6 +95,16 @@ MyTBBlog >> initialize [
 
 	super initialize.
 	posts := OrderedCollection new
+]
+
+{ #category : #accessing }
+MyTBBlog >> name [
+	^ name ifNil: [ 'TinyBlog' ] ifNotNil: [ :arg | name ]
+]
+
+{ #category : #accessing }
+MyTBBlog >> name: anObject [
+	name := anObject
 ]
 
 { #category : #action }
