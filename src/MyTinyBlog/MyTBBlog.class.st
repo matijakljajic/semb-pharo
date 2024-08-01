@@ -2,6 +2,7 @@ Class {
 	#name : #MyTBBlog,
 	#superclass : #Object,
 	#instVars : [
+		'admin',
 		'name',
 		'posts'
 	],
@@ -14,6 +15,18 @@ MyTBBlog class >> current [
 	^ self selectAll
 		ifNotEmpty: [ :x | x anyOne ]
 		ifEmpty: [ self new save ]
+]
+
+{ #category : #utilities }
+MyTBBlog class >> defaultUser [
+
+	^ 'admin'
+]
+
+{ #category : #utilities }
+MyTBBlog class >> defaultUserPass [
+
+	^ 'ztonpk'
 ]
 
 { #category : #'class initialization' }
@@ -45,6 +58,11 @@ MyTBBlog >> addPost: aMyTBPost [
 	
 	posts add: aMyTBPost.
 	self save
+]
+
+{ #category : #accessing }
+MyTBBlog >> admin [
+	^ admin
 ]
 
 { #category : #accessing }
@@ -84,6 +102,12 @@ MyTBBlog >> allVisiblePostsFromCategory: aCategory [
 ]
 
 { #category : #action }
+MyTBBlog >> createAdmin [
+
+	^ MyTBAdmin user: self class defaultUser pass: self class defaultUserPass
+]
+
+{ #category : #action }
 MyTBBlog >> deleteCategory: aCategory [
 
 	posts removeAllSuchThat: [ :x | x category = aCategory ].
@@ -94,7 +118,8 @@ MyTBBlog >> deleteCategory: aCategory [
 MyTBBlog >> initialize [
 
 	super initialize.
-	posts := OrderedCollection new
+	posts := OrderedCollection new.
+	admin := self createAdmin
 ]
 
 { #category : #accessing }

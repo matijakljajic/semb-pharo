@@ -43,6 +43,25 @@ MyTBBlogTest >> testAddPost [
 ]
 
 { #category : #tests }
+MyTBBlogTest >> testAdminChange [
+
+	| admin |
+	
+	admin := blog admin.
+	admin user: 'skeksis'.
+	admin pass: 'corrupt'.
+	self assert: blog admin user equals: 'skeksis'.
+	self assert: blog admin pass equals: (SHA256 hashMessage: 'corrupt')
+]
+
+{ #category : #tests }
+MyTBBlogTest >> testAdminCreation [
+
+	self assert: blog admin user equals: 'admin'.
+	self assert: blog admin pass equals: (SHA256 hashMessage: 'ztonpk')
+]
+
+{ #category : #tests }
 MyTBBlogTest >> testAllCategories [
 
 	self assert: blog allCategories size equals: 1.

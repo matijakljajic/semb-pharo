@@ -18,6 +18,7 @@ MyTBAppRootComponent class >> initialize [
 
 	| app |
 	app := WAAdmin register: self asApplicationAt: 'TinyBlog'.
+	app preferenceAt: #sessionClass put: MyTBSession.
 	app
 		addLibrary: JQDeploymentLibrary;
 		addLibrary: JQUiDeploymentLibrary;

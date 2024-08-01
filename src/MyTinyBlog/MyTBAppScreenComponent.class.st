@@ -22,7 +22,7 @@ MyTBAppScreenComponent >> children [
 { #category : #initialization }
 MyTBAppScreenComponent >> createHeaderComponent [
 
-	^ MyTBHeaderComponent new
+	^ MyTBHeaderComponent from: self
 ]
 
 { #category : #initialization }
