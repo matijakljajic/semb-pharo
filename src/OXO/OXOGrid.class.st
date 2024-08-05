@@ -1,0 +1,136 @@
+Class {
+	#name : #OXOGrid,
+	#superclass : #Object,
+	#instVars : [
+		'cells',
+		'moves',
+		'turn',
+		'winner'
+	],
+	#category : #OXO
+}
+
+{ #category : #adding }
+OXOGrid >> addMove [
+	"Increment number of moves played."
+
+	moves := moves + 1
+]
+
+{ #category : #adding }
+OXOGrid >> at: row at: col [
+	"Make move at said row and at said column if it's empty."
+
+	((self grid at: row at: col) state: self turn)
+		ifTrue: [ self addMove ]
+]
+
+{ #category : #testing }
+OXOGrid >> checkInCol: idx [
+	"Check column on said index for a winner."
+
+	| set |
+	winner ifNil: [
+		set := ((self grid atColumn: idx) collect: [ :x | x state ]) asSet.
+		self checkSet: set ].
+	^ winner
+]
+
+{ #category : #testing }
+OXOGrid >> checkInDiagonals [
+	"Check diagonals for a winner."
+
+	| set1 set2 |
+	winner ifNil: [
+		set1 := (self grid diagonal collect: [ :x | x state ]) asSet.
+		set2 := Set newFrom: {
+				        (self grid at: 1 at: 3) state.
+				        (self grid at: 2 at: 2) state.
+				        (self grid at: 3 at: 1) state } asOrderedCollection.
+		self checkSet: set1.
+		self checkSet: set2 ].
+	^ winner
+]
+
+{ #category : #testing }
+OXOGrid >> checkInRow: idx [
+	"Check row on said index for a winner."
+
+	| set |
+	winner ifNil: [
+		set := ((self grid atRow: idx) collect: [ :x | x state ]) asSet.
+		self checkSet: set ].
+	^ winner
+]
+
+{ #category : #testing }
+OXOGrid >> checkSet: aSet [
+	"Check if all symbols are the same."
+
+	aSet size == 1 ifFalse: [ ^ self ].
+	(aSet includes: 'X') ifTrue: [ winner := 'X' ].
+	(aSet includes: 'O') ifTrue: [ winner := 'O' ]
+]
+
+{ #category : #initialization }
+OXOGrid >> fillWithCells [
+	"Initalization helper."
+
+	cells indicesDo: [ :row :col |
+		cells at: row at: col put: (OXOCell at: row at: col) ]
+]
+
+{ #category : #accessing }
+OXOGrid >> grid [
+	"Get Array2D component itself."
+
+	^ cells
+]
+
+{ #category : #initialization }
+OXOGrid >> initialize [
+	"Initialize new OXO model with a 3x3 grid."
+
+	cells := Array2D new: 3.
+	self fillWithCells.
+	moves := 0
+]
+
+{ #category : #testing }
+OXOGrid >> isOver [
+	"Check if game's over."
+
+	moves >= 5 ifFalse: [ ^ false ].
+	1 to: 3 do: [ :idx |
+		self checkInRow: idx.
+		self checkInCol: idx ].
+	self checkInDiagonals.
+
+	(moves == 9 or: winner isNotNil)
+		ifTrue: [ ^ true ]
+		ifFalse: [ ^ false ]
+]
+
+{ #category : #accessing }
+OXOGrid >> moves [
+	"Get number of moves played."
+
+	^ moves
+]
+
+{ #category : #accessing }
+OXOGrid >> turn [
+	"Get who plays / whose turn it is based on number of moves played."
+
+	turn := moves % 2 = 0
+		        ifTrue: [ 'O' ]
+		        ifFalse: [ 'X' ].
+	^ turn
+]
+
+{ #category : #accessing }
+OXOGrid >> winner [
+	"Get winning symbol."
+
+	^ winner
+]
