@@ -1,7 +1,7 @@
 Class {
 	#name : #OXOCellTest,
 	#superclass : #TestCase,
-	#category : #'OXO-Tests-Model'
+	#category : #'OXO-Tests'
 }
 
 { #category : #tests }

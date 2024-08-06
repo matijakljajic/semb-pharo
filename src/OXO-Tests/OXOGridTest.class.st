@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'oxo'
 	],
-	#category : #'OXO-Tests-Model'
+	#category : #'OXO-Tests'
 }
 
 { #category : #running }
