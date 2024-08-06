@@ -7,7 +7,7 @@ Class {
 		'turn',
 		'winner'
 	],
-	#category : #OXO
+	#category : #'OXO-Model'
 }
 
 { #category : #adding }
@@ -15,14 +15,6 @@ OXOGrid >> addMove [
 	"Increment number of moves played."
 
 	moves := moves + 1
-]
-
-{ #category : #adding }
-OXOGrid >> at: row at: col [
-	"Make move at said row and at said column if it's empty."
-
-	((self grid at: row at: col) state: self turn)
-		ifTrue: [ self addMove ]
 ]
 
 { #category : #testing }
@@ -77,7 +69,7 @@ OXOGrid >> fillWithCells [
 	"Initalization helper."
 
 	cells indicesDo: [ :row :col |
-		cells at: row at: col put: (OXOCell at: row at: col) ]
+		cells at: row at: col put: (OXOCell new) ]
 ]
 
 { #category : #accessing }
@@ -109,6 +101,14 @@ OXOGrid >> isOver [
 	(moves == 9 or: winner isNotNil)
 		ifTrue: [ ^ true ]
 		ifFalse: [ ^ false ]
+]
+
+{ #category : #adding }
+OXOGrid >> makeMove: aCell [
+	"Make move at said row and at said column if it's empty."
+
+	(aCell state: self turn)
+		ifTrue: [ self addMove ]
 ]
 
 { #category : #accessing }

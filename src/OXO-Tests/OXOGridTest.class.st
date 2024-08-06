@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'oxo'
 	],
-	#category : #'OXO-Tests'
+	#category : #'OXO-Tests-Model'
 }
 
 { #category : #running }
@@ -20,33 +20,21 @@ OXOGridTest >> testAddMove [
 
 	self assert: oxo moves equals: 0.
 
-	oxo at: 1 at: 1.
+	oxo makeMove: (oxo grid asArray at: 1).
 
 	self assert: oxo moves equals: 1
 ]
 
 { #category : #tests }
-OXOGridTest >> testAtAt [
-
-	self assert: oxo moves equals: 0.
-	oxo at: 1 at: 1.
-	self
-		assert: (oxo grid at: 1 at: 1) state equals: 'O';
-		assert: oxo moves equals: 1.
-
-	self should: [ oxo at: 1 at: 1 ] raise: Error
-]
-
-{ #category : #tests }
 OXOGridTest >> testCheckInCol [
 
-	oxo at: 1 at: 1.
-	oxo at: 2 at: 1.
-	oxo at: 3 at: 3.
-	oxo at: 1 at: 2.
-	oxo at: 1 at: 3.
-	oxo at: 2 at: 2.
-	oxo at: 2 at: 3.
+	oxo makeMove: (oxo grid asArray at: 1).
+	oxo makeMove: (oxo grid asArray at: 4).
+	oxo makeMove: (oxo grid asArray at: 9).
+	oxo makeMove: (oxo grid asArray at: 2).
+	oxo makeMove: (oxo grid asArray at: 3).
+	oxo makeMove: (oxo grid asArray at: 5).
+	oxo makeMove: (oxo grid asArray at: 6).
 	
 	self assert: (oxo checkInCol: 2) equals: nil.
 	self assert: (oxo checkInCol: 3) equals: 'O'.
@@ -63,63 +51,63 @@ OXOGridTest >> testCheckInDiagonals [
 { #category : #tests }
 OXOGridTest >> testCheckInDiagonals1 [
 
-	oxo at: 1 at: 1.
-	oxo at: 2 at: 1.
-	oxo at: 3 at: 3.
-	oxo at: 1 at: 2.
-	oxo at: 1 at: 3.
-	oxo at: 2 at: 3.
-	oxo at: 2 at: 2.
-	
-	self assert: (oxo checkInDiagonals) equals: 'O'.
+	oxo makeMove: (oxo grid asArray at: 1).
+	oxo makeMove: (oxo grid asArray at: 4).
+	oxo makeMove: (oxo grid asArray at: 9).
+	oxo makeMove: (oxo grid asArray at: 2).
+	oxo makeMove: (oxo grid asArray at: 3).
+	oxo makeMove: (oxo grid asArray at: 6).
+	oxo makeMove: (oxo grid asArray at: 5).
+
+	self assert: oxo checkInDiagonals equals: 'O'
 ]
 
 { #category : #tests }
 OXOGridTest >> testCheckInDiagonals2 [
 
-	oxo at: 1 at: 1.
-	oxo at: 2 at: 1.
-	oxo at: 3 at: 1.
-	oxo at: 1 at: 2.
-	oxo at: 1 at: 3.
-	oxo at: 2 at: 3.
-	oxo at: 2 at: 2.
-	
-	self assert: (oxo checkInDiagonals) equals: 'O'.
+	oxo makeMove: (oxo grid asArray at: 1).
+	oxo makeMove: (oxo grid asArray at: 4).
+	oxo makeMove: (oxo grid asArray at: 7).
+	oxo makeMove: (oxo grid asArray at: 2).
+	oxo makeMove: (oxo grid asArray at: 3).
+	oxo makeMove: (oxo grid asArray at: 6).
+	oxo makeMove: (oxo grid asArray at: 5).
+
+	self assert: oxo checkInDiagonals equals: 'O'
 ]
 
 { #category : #tests }
 OXOGridTest >> testCheckInRow [
 
-	oxo at: 1 at: 1.
-	oxo at: 2 at: 1.
-	oxo at: 3 at: 3.
-	oxo at: 1 at: 2.
-	oxo at: 1 at: 3.
-	oxo at: 2 at: 2.
-	oxo at: 3 at: 2.
-	oxo at: 2 at: 3.
-	
+	oxo makeMove: (oxo grid asArray at: 1).
+	oxo makeMove: (oxo grid asArray at: 4).
+	oxo makeMove: (oxo grid asArray at: 9).
+	oxo makeMove: (oxo grid asArray at: 2).
+	oxo makeMove: (oxo grid asArray at: 3).
+	oxo makeMove: (oxo grid asArray at: 5).
+	oxo makeMove: (oxo grid asArray at: 8).
+	oxo makeMove: (oxo grid asArray at: 6).
+
 	self assert: (oxo checkInRow: 1) equals: nil.
-	self assert: (oxo checkInRow: 2) equals: 'X'.
+	self assert: (oxo checkInRow: 2) equals: 'X'
 ]
 
 { #category : #tests }
 OXOGridTest >> testCheckSet [
 
 	| set |
-	oxo at: 1 at: 1.
-	oxo at: 2 at: 1.
-	oxo at: 3 at: 3.
-	oxo at: 1 at: 2.
-	oxo at: 1 at: 3.
-	oxo at: 2 at: 2.
-	oxo at: 2 at: 3.
-	
+	oxo makeMove: (oxo grid asArray at: 1).
+	oxo makeMove: (oxo grid asArray at: 4).
+	oxo makeMove: (oxo grid asArray at: 9).
+	oxo makeMove: (oxo grid asArray at: 2).
+	oxo makeMove: (oxo grid asArray at: 3).
+	oxo makeMove: (oxo grid asArray at: 5).
+	oxo makeMove: (oxo grid asArray at: 6).
+
 	set := ((oxo grid atColumn: 2) collect: [ :x | x state ]) asSet.
 	oxo checkSet: set.
 	self assert: oxo winner equals: nil.
-	
+
 	set := ((oxo grid atColumn: 3) collect: [ :x | x state ]) asSet.
 	oxo checkSet: set.
 	self assert: oxo winner equals: 'O'
@@ -150,19 +138,31 @@ OXOGridTest >> testInitialize [
 { #category : #tests }
 OXOGridTest >> testIsOver [
 
-	oxo at: 1 at: 1.
-	oxo at: 2 at: 1.
-	oxo at: 3 at: 3.
-	oxo at: 1 at: 2.
-	oxo at: 1 at: 3.
-	oxo at: 2 at: 2.
-	oxo at: 3 at: 2.
+	oxo makeMove: (oxo grid asArray at: 1).
+	oxo makeMove: (oxo grid asArray at: 4).
+	oxo makeMove: (oxo grid asArray at: 9).
+	oxo makeMove: (oxo grid asArray at: 2).
+	oxo makeMove: (oxo grid asArray at: 3).
+	oxo makeMove: (oxo grid asArray at: 5).
+	oxo makeMove: (oxo grid asArray at: 8).
 
 	self assert: oxo isOver equals: false.
 	
-	oxo at: 2 at: 3.
+	oxo makeMove: (oxo grid asArray at: 6).
 	
 	self assert: oxo isOver equals: true
+]
+
+{ #category : #tests }
+OXOGridTest >> testMakeMove [
+
+	self assert: oxo moves equals: 0.
+	oxo makeMove: (oxo grid asArray at: 1).
+	self
+		assert: (oxo grid asArray at: 1) state equals: 'O';
+		assert: oxo moves equals: 1.
+
+	self should: [ oxo makeMove: (oxo grid asArray at: 1) ] raise: Error
 ]
 
 { #category : #tests }
@@ -175,6 +175,6 @@ OXOGridTest >> testMoves [
 OXOGridTest >> testTurn [
 
 	self assert: oxo turn equals: 'O'.
-	oxo at: 1 at: 1.
+	oxo makeMove: (oxo grid asArray at: 1).
 	self assert: oxo turn equals: 'X'
 ]
