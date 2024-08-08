@@ -15,8 +15,8 @@ BaselineOfOXO >> baseline: spec [
 				declareBlocOn: spec.
 			"Packages"
 			spec
-				package: 'OXO' with: [ spec requires: #('Bloc' 'OXO-AI') ];
 				package: 'OXO-AI';
+				package: 'OXO' with: [ spec requires: #('Bloc' 'OXO-AI') ];
 				package: 'OXO-Tests' with: [ spec requires: #('OXO' 'OXO-AI') ].
  ]
 ]
