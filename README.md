@@ -23,4 +23,4 @@ Executing `OXO playVsPlayer` or `OXO playVsComputer` will start your game.
 
 ### License
 
-Code found in this repository is under the [GPL-2.0 license](https://raw.githubusercontent.com/matijakljajic/semb-pharo/main/LICENSE).
+Code found in this repository is licensed under [MIT](https://raw.githubusercontent.com/matijakljajic/semb-pharo/main/LICENSE).
