@@ -19,4 +19,4 @@ Metacello new
         load
 ```
 
-Executing `OXO playVsPlayer` will start your game.
+Executing `OXO playVsPlayer` or `OXO playVsComputer` will start your game.
