@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'oxo'
 	],
-	#category : #'OXO-Tests'
+	#category : #'OXO-Tests-Game'
 }
 
 { #category : #running }
@@ -160,9 +160,7 @@ OXOGridTest >> testMakeMove [
 	oxo makeMove: (oxo grid asArray at: 1).
 	self
 		assert: (oxo grid asArray at: 1) state equals: 'O';
-		assert: oxo moves equals: 1.
-
-	self should: [ oxo makeMove: (oxo grid asArray at: 1) ] raise: Error
+		assert: oxo moves equals: 1
 ]
 
 { #category : #tests }

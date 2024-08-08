@@ -2,45 +2,78 @@ Class {
 	#name : #OXO,
 	#superclass : #Object,
 	#instVars : [
+		'game',
 		'space'
 	],
 	#category : #'OXO-Game'
 }
 
-{ #category : #accessing }
+{ #category : #'instance creation' }
 OXO class >> playVsComputer [
 
-	^ self new
+	| newGame |
+	
+	newGame := self new.
+	
+	newGame game: (OXOGridElement newWithAI: newGame).
+	newGame space root addChild: newGame game.
+	newGame space root whenLayoutedDoOnce: [ newGame space extent: newGame game size ].
+	
+	newGame space show.
+	
+	^ newGame
+]
+
+{ #category : #'instance creation' }
+OXO class >> playVsPlayer [
+
+	| newGame |
+	
+	newGame := self new.
+	
+	newGame game: (OXOGridElement new: newGame).
+	newGame space root addChild: newGame game.
+	newGame space root whenLayoutedDoOnce: [ newGame space extent: newGame game size ].
+	
+	newGame space show.
+	
+	^ newGame
 ]
 
 { #category : #accessing }
-OXO class >> playVsPlayer [
+OXO >> game [
 
-	^ self new
+	^ game
+]
+
+{ #category : #accessing }
+OXO >> game: anObject [
+
+	game := anObject
 ]
 
 { #category : #initialization }
 OXO >> initialize [
 	
-	| game |
-	game := OXOGridElement new: self.
-	
 	space := BlSpace new.
 	space title: 'OXO'.
-	space root addChild: game.
-	space root whenLayoutedDoOnce: [ space extent: game size ].
 	space position: 300 @ 150.
 	space resizable: false.
-	
-	space show
 ]
 
 { #category : #initialization }
 OXO >> reset [
 
-	| game |
-	game := OXOGridElement new: self.
+	game := (self space root childAt: 1) ai
+		        ifTrue: [ OXOGridElement newWithAI: self ]
+		        ifFalse: [ OXOGridElement new: self ].
 
 	space root removeChildren.
 	space root addChild: game
+]
+
+{ #category : #accessing }
+OXO >> space [
+
+	^ space
 ]
