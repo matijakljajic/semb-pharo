@@ -29,13 +29,8 @@ OXOCellElement >> cell: anOXOCell [
 ]
 
 { #category : #'event action' }
-OXOCellElement >> click [
+OXOCellElement >> checkWinCondition [
 
-	(self parent model moves = 9 or: self parent model winner isNotNil)
-		ifTrue: [ ^ self parent game reset ].
-
-	self parent model makeMove: self cell.
-	self fillCell: self parent model turn.
 	(self parent model isOver and: self parent model winner = 'O')
 		ifTrue: [ self parent changeChildrenColor: Color green twiceDarker ]
 		ifFalse: [
@@ -43,6 +38,22 @@ OXOCellElement >> click [
 				self parent changeChildrenColor: Color red twiceDarker ].
 			self parent model moves = 9 ifTrue: [
 				self parent changeChildrenColor: Color yellow twiceDarker ] ]
+]
+
+{ #category : #'event action' }
+OXOCellElement >> click [
+
+	(self parent model moves = 9 or: self parent model winner isNotNil)
+		ifTrue: [ ^ self parent game reset ].
+
+	self cell state ifNotNil: [ UIManager default inform: 'Tried to edit already filled cell.'. 42. ^ self ].
+
+	self makeMove.
+	self checkWinCondition.
+
+	self parent model winner ifNil: [
+		self makeAIMove.
+		self checkWinCondition ]
 ]
 
 { #category : #accessing }
@@ -64,11 +75,30 @@ OXOCellElement >> initialize [
 	self background: (BlColorPaint color: Color black).
 
 	self cell: OXOCell new.
-	self addEventHandlerOn: BlClickEvent do: [ :anEvent | self click ]
+	
+	self addEventHandlerOn: BlClickEvent do: [ :anEvent | self click ].
 ]
 
 { #category : #initialization }
 OXOCellElement >> initializeText [
 
 	text := BlTextElement new
+]
+
+{ #category : #'event action' }
+OXOCellElement >> makeAIMove [
+
+	| pickedCell |
+	self parent ai ifFalse: [ ^ self ].
+	pickedCell := (OXOAI new: self parent model) makeBestMove.
+	self parent model makeMove: pickedCell.
+	self parent childrenDo: [ :cellEl |
+		cellEl cell = pickedCell ifTrue: [ cellEl fillCell: self parent model turn ] ].
+]
+
+{ #category : #'event action' }
+OXOCellElement >> makeMove [
+
+	self parent model makeMove: self cell.
+	self fillCell: self parent model turn
 ]

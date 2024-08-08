@@ -16,6 +16,12 @@ OXOCell >> printOn: aStream [
 		ifNotNil: [ aStream nextPutAll: state ]
 ]
 
+{ #category : #action }
+OXOCell >> reset [
+
+	state := nil
+]
+
 { #category : #accessing }
 OXOCell >> state [
 	"Get cell state."
@@ -29,5 +35,5 @@ OXOCell >> state: aState [
 
 	^ state
 		  ifNil: [ state := aState. true ]
-		  ifNotNil: [ self error: 'Tried to edit cell''s state.'. false ]
+		  ifNotNil: [ false ]
 ]

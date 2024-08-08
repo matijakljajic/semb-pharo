@@ -107,8 +107,7 @@ OXOGrid >> isOver [
 OXOGrid >> makeMove: aCell [
 	"Make move at said row and at said column if it's empty."
 
-	(aCell state: self turn)
-		ifTrue: [ self addMove ]
+	aCell ifNotNil: [ (aCell state: self turn) ifTrue: [ self addMove ] ]
 ]
 
 { #category : #accessing }
@@ -128,9 +127,31 @@ OXOGrid >> turn [
 	^ turn
 ]
 
+{ #category : #adding }
+OXOGrid >> undoMove [
+	"Increment number of moves played."
+
+	moves := moves - 1
+]
+
+{ #category : #adding }
+OXOGrid >> undoMove: aCell [
+	"Make move at said row and at said column if it's empty."
+
+	aCell reset.
+	self undoMove.
+]
+
 { #category : #accessing }
 OXOGrid >> winner [
 	"Get winning symbol."
 
 	^ winner
+]
+
+{ #category : #accessing }
+OXOGrid >> winner: anObject [
+	"Set winning symbol."
+
+	winner := anObject
 ]

@@ -3,7 +3,8 @@ Class {
 	#superclass : #BlElement,
 	#instVars : [
 		'game',
-		'model'
+		'model',
+		'ai'
 	],
 	#category : #'OXO-View'
 }
@@ -12,6 +13,24 @@ Class {
 OXOGridElement class >> new: aBlSpace [
 
 	^ self new game: aBlSpace
+]
+
+{ #category : #'instance creation' }
+OXOGridElement class >> newWithAI: aBlSpace [
+
+	^ (self new game: aBlSpace) ai: true
+]
+
+{ #category : #accessing }
+OXOGridElement >> ai [
+
+	^ ai
+]
+
+{ #category : #accessing }
+OXOGridElement >> ai: anObject [
+
+	ai := anObject
 ]
 
 { #category : #accessing }
@@ -44,7 +63,8 @@ OXOGridElement >> initialize [
 		layoutConstraints horizontal fitContent.
 		layoutConstraints vertical fitContent ].
 
-	self model: OXOGrid new
+	self model: OXOGrid new.
+	self ai: false
 ]
 
 { #category : #accessing }

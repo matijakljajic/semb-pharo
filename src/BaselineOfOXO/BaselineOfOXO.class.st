@@ -16,7 +16,8 @@ BaselineOfOXO >> baseline: spec [
 		"Packages"
 		spec
 			package: 'OXO';
-			package: 'OXO-Tests' with: [ spec requires: #( 'OXO' ) ] ]
+			package: 'OXO-AI' with: [ spec requires: #('OXO') ];
+			package: 'OXO-Tests' with: [ spec requires: #( 'OXO' 'OXO-AI' ) ] ]
 ]
 
 { #category : #accessing }
