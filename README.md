@@ -12,6 +12,8 @@
 
 ### How to load the project?
 
+___Notice___: Currently works with _Pharo 11 (old stable)_. Currently working on fixes so that it works on newer versions.
+
 Load it into your image with:
 ```Smalltalk
 Metacello new
@@ -20,7 +22,11 @@ Metacello new
         load
 ```
 
-Executing `OXO playVsPlayer` or `OXO playVsComputer` will start your game.
+### How to start the game?
+
+Executing: 
+- `OXO playVsPlayer` will start a 2-player game.
+- `OXO playVsComputer` will start a 1-player game.
 
 ### License
 
