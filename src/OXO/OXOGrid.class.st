@@ -87,8 +87,9 @@ OXOGrid >> grid [
 { #category : 'initialization' }
 OXOGrid >> initialize [
 	"Initialize new OXO model with a 3x3 grid."
-
-	cells := Array2D new: 3.
+	
+	super initialize.
+	cells := CTArray2D width: 3 height: 3.
 	self fillWithCells.
 	moves := 0
 ]
