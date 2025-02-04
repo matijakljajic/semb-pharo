@@ -12,8 +12,6 @@
 
 ### How to load the project?
 
-___Notice___: Currently works with _Pharo 11 (old stable)_. Currently working on fixes so that it works on newer versions.
-
 Load it into your image with:
 ```Smalltalk
 Metacello new
@@ -31,4 +29,3 @@ Executing:
 ### License
 
 Code found in this repository is licensed under [MIT](https://raw.githubusercontent.com/matijakljajic/semb-pharo/main/LICENSE).
-
