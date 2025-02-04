@@ -1,34 +1,36 @@
 Class {
-	#name : #OXOCellElement,
-	#superclass : #BlElement,
+	#name : 'OXOCellElement',
+	#superclass : 'BlElement',
 	#instVars : [
 		'cell',
 		'text'
 	],
-	#category : #'OXO-View'
+	#category : 'OXO-View',
+	#package : 'OXO',
+	#tag : 'View'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 OXOCellElement class >> new: anOXOCell [
 
 	^ self new cell: anOXOCell.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OXOCellElement >> cell [
 	"Get OXOCell instance."
 
 	^ cell
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OXOCellElement >> cell: anOXOCell [
 	"Set OXOCell instance."
 
 	cell := anOXOCell
 ]
 
-{ #category : #'event action' }
+{ #category : 'event action' }
 OXOCellElement >> checkWinCondition [
 
 	(self parent model isOver and: self parent model winner = 'O')
@@ -40,7 +42,7 @@ OXOCellElement >> checkWinCondition [
 				self parent changeChildrenColor: Color yellow twiceDarker ] ]
 ]
 
-{ #category : #'event action' }
+{ #category : 'event action' }
 OXOCellElement >> click [
 
 	(self parent model moves = 9 or: self parent model winner isNotNil)
@@ -56,7 +58,7 @@ OXOCellElement >> click [
 		self checkWinCondition ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OXOCellElement >> fillCell: aState [
 	"Set cell state in String form."
 
@@ -64,7 +66,7 @@ OXOCellElement >> fillCell: aState [
 	self addChild: text
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 OXOCellElement >> initialize [
 
 	super initialize.
@@ -79,13 +81,13 @@ OXOCellElement >> initialize [
 	self addEventHandlerOn: BlClickEvent do: [ :anEvent | self click ].
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 OXOCellElement >> initializeText [
 
 	text := BlTextElement new
 ]
 
-{ #category : #'event action' }
+{ #category : 'event action' }
 OXOCellElement >> makeAIMove [
 
 	| pickedCell |
@@ -96,7 +98,7 @@ OXOCellElement >> makeAIMove [
 		cellEl cell = pickedCell ifTrue: [ cellEl fillCell: self parent model turn ] ].
 ]
 
-{ #category : #'event action' }
+{ #category : 'event action' }
 OXOCellElement >> makeMove [
 
 	self parent model makeMove: self cell.

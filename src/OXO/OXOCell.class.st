@@ -1,13 +1,15 @@
 Class {
-	#name : #OXOCell,
-	#superclass : #Object,
+	#name : 'OXOCell',
+	#superclass : 'Object',
 	#instVars : [
 		'state'
 	],
-	#category : #'OXO-Model'
+	#category : 'OXO-Model',
+	#package : 'OXO',
+	#tag : 'Model'
 }
 
-{ #category : #printing }
+{ #category : 'printing' }
 OXOCell >> printOn: aStream [
 	"Print cell state for easier debugging process."
 
@@ -16,20 +18,20 @@ OXOCell >> printOn: aStream [
 		ifNotNil: [ aStream nextPutAll: state ]
 ]
 
-{ #category : #action }
+{ #category : 'action' }
 OXOCell >> reset [
 
 	state := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OXOCell >> state [
 	"Get cell state."
 
 	^ state
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OXOCell >> state: aState [
 	"Set cell state - restrict editing of a state once it's set."
 

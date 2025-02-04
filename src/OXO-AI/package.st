@@ -1,1 +1,1 @@
-Package { #name : #'OXO-AI' }
+Package { #name : 'OXO-AI' }

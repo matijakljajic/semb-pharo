@@ -1,57 +1,59 @@
 Class {
-	#name : #OXOGridElement,
-	#superclass : #BlElement,
+	#name : 'OXOGridElement',
+	#superclass : 'BlElement',
 	#instVars : [
 		'game',
 		'model',
 		'ai'
 	],
-	#category : #'OXO-View'
+	#category : 'OXO-View',
+	#package : 'OXO',
+	#tag : 'View'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 OXOGridElement class >> new: aBlSpace [
 
 	^ self new game: aBlSpace
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 OXOGridElement class >> newWithAI: aBlSpace [
 
 	^ (self new game: aBlSpace) ai: true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OXOGridElement >> ai [
 
 	^ ai
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OXOGridElement >> ai: anObject [
 
 	ai := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OXOGridElement >> changeChildrenColor: aColor [
 
 	self childrenDo: [ :x | x background: aColor ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OXOGridElement >> game [
 
 	^ game
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OXOGridElement >> game: anObject [
 
 	game := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 OXOGridElement >> initialize [
 
 	super initialize.
@@ -67,13 +69,13 @@ OXOGridElement >> initialize [
 	self ai: false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OXOGridElement >> model [
 
 	^ model
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OXOGridElement >> model: anOXOGrid [
 
 	model := anOXOGrid.
