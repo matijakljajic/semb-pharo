@@ -1,10 +1,12 @@
 Class {
-	#name : #OXOCellTest,
-	#superclass : #TestCase,
-	#category : #'OXO-Tests-Game'
+	#name : 'OXOCellTest',
+	#superclass : 'TestCase',
+	#category : 'OXO-Tests-Game',
+	#package : 'OXO-Tests',
+	#tag : 'Game'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 OXOCellTest >> testReset [
 
 	| cell |
@@ -15,7 +17,7 @@ OXOCellTest >> testReset [
 	self assert: cell state equals: nil.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OXOCellTest >> testState [
 
 	| cell |

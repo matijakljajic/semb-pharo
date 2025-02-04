@@ -1,10 +1,11 @@
 Class {
-	#name : #BaselineOfOXO,
-	#superclass : #BaselineOf,
-	#category : #BaselineOfOXO
+	#name : 'BaselineOfOXO',
+	#superclass : 'BaselineOf',
+	#category : 'BaselineOfOXO',
+	#package : 'BaselineOfOXO'
 }
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfOXO >> baseline: spec [
 	<baseline>
 	spec
@@ -12,7 +13,8 @@ BaselineOfOXO >> baseline: spec [
 		do: [ 
 			"Dependencies"
 			self
-				declareBlocOn: spec.
+				declareBlocOn: spec;
+				declareCTArray2DOn: spec.
 			"Packages"
 			spec
 				package: 'OXO-AI';
@@ -21,14 +23,21 @@ BaselineOfOXO >> baseline: spec [
  ]
 ]
 
-{ #category : #'external projects' }
+{ #category : 'external projects' }
 BaselineOfOXO >> declareBlocOn: spec [
 	spec
 		baseline: 'Bloc'
 		with: [ spec repository: 'github://pharo-graphics/Bloc:v2.0.0/src' ]
 ]
 
-{ #category : #accessing }
+{ #category : 'external projects' }
+BaselineOfOXO >> declareCTArray2DOn: spec [
+	spec
+		baseline: 'ContainersArray2D' 
+		with: [ spec repository: 'github://pharo-containers/Containers-Array2D/src' ].
+]
+
+{ #category : 'accessing' }
 BaselineOfOXO >> projectClass [
 	^ MetacelloCypressBaselineProject
 ]

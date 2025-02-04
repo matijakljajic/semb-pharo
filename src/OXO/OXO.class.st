@@ -1,14 +1,16 @@
 Class {
-	#name : #OXO,
-	#superclass : #Object,
+	#name : 'OXO',
+	#superclass : 'Object',
 	#instVars : [
 		'game',
 		'space'
 	],
-	#category : #'OXO-Game'
+	#category : 'OXO-Game',
+	#package : 'OXO',
+	#tag : 'Game'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 OXO class >> playVsComputer [
 
 	| newGame |
@@ -24,7 +26,7 @@ OXO class >> playVsComputer [
 	^ newGame
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 OXO class >> playVsPlayer [
 
 	| newGame |
@@ -40,19 +42,19 @@ OXO class >> playVsPlayer [
 	^ newGame
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OXO >> game [
 
 	^ game
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OXO >> game: anObject [
 
 	game := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 OXO >> initialize [
 	
 	space := BlSpace new.
@@ -61,7 +63,7 @@ OXO >> initialize [
 	space resizable: false.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 OXO >> reset [
 
 	game := (self space root childAt: 1) ai
@@ -72,7 +74,7 @@ OXO >> reset [
 	space root addChild: game
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OXO >> space [
 
 	^ space

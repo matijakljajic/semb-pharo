@@ -1,13 +1,15 @@
 Class {
-	#name : #OXOGridTest,
-	#superclass : #TestCase,
+	#name : 'OXOGridTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'oxo'
 	],
-	#category : #'OXO-Tests-Game'
+	#category : 'OXO-Tests-Game',
+	#package : 'OXO-Tests',
+	#tag : 'Game'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 OXOGridTest >> setUp [
 
 	super setUp.
@@ -15,7 +17,7 @@ OXOGridTest >> setUp [
 	oxo := OXOGrid new.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OXOGridTest >> testAddMove [
 
 	self assert: oxo moves equals: 0.
@@ -25,7 +27,7 @@ OXOGridTest >> testAddMove [
 	self assert: oxo moves equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OXOGridTest >> testCheckInCol [
 
 	oxo makeMove: (oxo grid asArray at: 1).
@@ -40,7 +42,7 @@ OXOGridTest >> testCheckInCol [
 	self assert: (oxo checkInCol: 3) equals: 'O'.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OXOGridTest >> testCheckInDiagonals [
 
 	self testCheckInDiagonals1.
@@ -48,7 +50,7 @@ OXOGridTest >> testCheckInDiagonals [
 	self testCheckInDiagonals2.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OXOGridTest >> testCheckInDiagonals1 [
 
 	oxo makeMove: (oxo grid asArray at: 1).
@@ -62,7 +64,7 @@ OXOGridTest >> testCheckInDiagonals1 [
 	self assert: oxo checkInDiagonals equals: 'O'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OXOGridTest >> testCheckInDiagonals2 [
 
 	oxo makeMove: (oxo grid asArray at: 1).
@@ -76,7 +78,7 @@ OXOGridTest >> testCheckInDiagonals2 [
 	self assert: oxo checkInDiagonals equals: 'O'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OXOGridTest >> testCheckInRow [
 
 	oxo makeMove: (oxo grid asArray at: 1).
@@ -92,7 +94,7 @@ OXOGridTest >> testCheckInRow [
 	self assert: (oxo checkInRow: 2) equals: 'X'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OXOGridTest >> testCheckSet [
 
 	| set |
@@ -113,29 +115,29 @@ OXOGridTest >> testCheckSet [
 	self assert: oxo winner equals: 'O'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OXOGridTest >> testFillWithCells [
 
 	self assert: oxo grid size equals: 9
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OXOGridTest >> testGrid [
 
-	self assert: (oxo grid isMemberOf: Array2D)
+	self assert: (oxo grid isMemberOf: CTArray2D)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OXOGridTest >> testInitialize [
 
 	self
-		assert: oxo grid rowCount equals: 3;
-		assert: oxo grid columnCount equals: 3;
+		assert: oxo grid numberOfRows equals: 3;
+		assert: oxo grid numberOfColumns equals: 3;
 		assert: oxo grid size equals: 9;
 		assert: oxo moves equals: 0
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OXOGridTest >> testIsOver [
 
 	oxo makeMove: (oxo grid asArray at: 1).
@@ -145,15 +147,13 @@ OXOGridTest >> testIsOver [
 	oxo makeMove: (oxo grid asArray at: 3).
 	oxo makeMove: (oxo grid asArray at: 5).
 	oxo makeMove: (oxo grid asArray at: 8).
+	self deny: oxo isOver.
 
-	self assert: oxo isOver equals: false.
-	
 	oxo makeMove: (oxo grid asArray at: 6).
-	
-	self assert: oxo isOver equals: true
+	self assert: oxo isOver
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OXOGridTest >> testMakeMove [
 
 	self assert: oxo moves equals: 0.
@@ -163,13 +163,13 @@ OXOGridTest >> testMakeMove [
 		assert: oxo moves equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OXOGridTest >> testMoves [
 
 	self assert: oxo moves equals: 0
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 OXOGridTest >> testTurn [
 
 	self assert: oxo turn equals: 'O'.
