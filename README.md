@@ -5,7 +5,7 @@
 
 This is a simulation of the [Xs & Os / Tic-Tac-Toe / Noughts & Crosses](https://en.wikipedia.org/wiki/Tic-tac-toe) game with the respective [Minimax](https://en.wikipedia.org/wiki/Minimax) algorithm implementation, showcased in the [Pharo](https://pharo.org/) environment using [Bloc](https://github.com/pharo-graphics/Bloc), Pharo's low-level UI framework. The goal of this work is to representatively show the power of [TDD](https://en.wikipedia.org/wiki/Test-driven_development) and pure object-oriented programming, with the ability to interact with objects live for an easier debugging experience.
 
-- ___Note #1___: This project was done for a seminar paper. You can download and read the paper over this [link](https://github.com/matijakljajic/semb-pharo/blob/main/res/Implementacija%20igre%20sa%20nultom%20sumom%20i%20minimaks%20algoritma%20u%20Pharo%20okru%C5%BEenju.pdf). (in Serbian)
+- ___Note #1___: This project was done for a seminar paper. You can download and read the paper over this [link](https://github.com/matijakljajic/semb-pharo/blob/main/res/Implementacija%20igre%20sa%20nultom%20sumom%20i%20minimaks%20algoritma%20u%20Pharo%20okru%C5%BEenju.pdf) (in Serbian). The seminar paper follows the project up until [this commit](https://github.com/matijakljajic/semb-pharo/tree/3a94edbb4724f3358b6d70b33b6acdf38db40970), and from that point onwards documentation found in the codebase supersedes the seminar paper.
 - ___Note #2___: Pharo MOOC served as a sort of prerequisite before I started working on the seminar paper. Some info about my progress regarding the MOOC can be found [here](https://github.com/matijakljajic/semb-pharo/tree/extra).
 
 ## First steps
