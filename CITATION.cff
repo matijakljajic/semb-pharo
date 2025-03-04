@@ -9,7 +9,7 @@ authors:
     family-names: Kljajić
     email: contact@matijakljajic.com
     orcid: 'https://orcid.org/0009-0007-9039-147X'
-repository-code: 'https://github.com/matijakljajic/semb-pharo'
+repository-code: 'https://github.com/matijakljajic/oxo-pharo'
 keywords:
   - Pharo
   - Smalltalk
