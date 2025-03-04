@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+title: Xs&Os and its Minimax implementation in Pharo
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Matija
+    family-names: Kljajić
+    email: contact@matijakljajic.com
+    orcid: 'https://orcid.org/0009-0007-9039-147X'
+repository-code: 'https://github.com/matijakljajic/semb-pharo'
+keywords:
+  - Pharo
+  - Smalltalk
+  - Bloc
+  - Object-Oriented Programming
+  - Minimax
+  - Artificial Intelligence in Games
+  - Testing
+  - Video Game Development
+license: MIT
